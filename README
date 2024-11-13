@@ -97,3 +97,10 @@ ufw allow 5555
 ```
 
 After that on first server make cascade connection to iran server and its done!! enjoy
+
+## 1. Setup Instructions for Both Servers
+
+### 1. System Update
+
+```bash
+apt update && apt upgrade -y
