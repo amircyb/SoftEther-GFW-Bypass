@@ -104,3 +104,9 @@ After that on first server make cascade connection to iran server and its done!!
 
 ```bash
 apt update && apt upgrade -y
+Add the following line:
+
+```
+
+* * * * * /usr/local/bin/update_vpn_dns.sh
+```
