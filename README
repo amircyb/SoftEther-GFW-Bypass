@@ -10,58 +10,69 @@ Set up two servers, one outside and one inside Iran, both running Linux. Follow 
 1. Setup Instructions for Both Servers
 
 1. System Update
-```
+```bash
+
 apt update && apt upgrade -y
 ```
 2. Install Prerequisites
-```
+```bash
+
 apt-get -y install build-essential wget make curl gcc wget zlib1g-dev tzdata git libreadline-dev libncurses-dev libssl-dev
 ```
 Installation
 1. Download SoftEther
 Replace (download link) with the official SoftEther download link.
 
-```
+```bash
+
 wget (download link)
 ```
 2. Extract the Downloaded File
 Replace (download file name) with the actual name of the downloaded file.
-```
+```bash
+
 ls   # Verify file name
 tar xzf (download file name)
 ```
 
 3. Compile SoftEther
-```
+```bash
+
 cd vpnserver
 make
 cd ..
 ```
 4. Move to /usr/local
-```
+```bash
+
 mv vpnserver /usr/local
 cd /usr/local/vpnserver/
 ```
 5. Set Permissions
-```
+```bash
+
 chmod 600 *
 chmod 700 vpnserver vpncmd
 ```
 6. Start the VPN Server
-```
+```bash
+
 ./vpnserver start
 ```
 Configuration
 1. Access the Management Panel
-```
+```bash
+
 ./vpncmd
 ```
 2. Set the Server Password
-```
+```bash
+
 ServerPasswordSet
 ```
 3. Configure Systemd Service
-```
+```bash
+
 sudo cat >> /lib/systemd/system/vpnserver.service << EOF
 [Unit]
 Description=SoftEther VPN Server
@@ -75,12 +86,11 @@ WantedBy=multi-user.target
 EOF
 ```
 4. Enable IP Forwarding
-```
+```bash
+
 echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
 sysctl -p
-```
-5. Start and Enable the VPN Service
-```
+
 systemctl enable vpnserver
 systemctl start vpnserver
 systemctl status vpnserver
@@ -88,7 +98,7 @@ systemctl status vpnserver
 Firewall Settings
 Allow necessary ports for VPN connections:
 
-```
+```bash
 ufw allow 443
 ufw allow 500,4500/udp
 ufw allow 1701
